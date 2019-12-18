@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Автор: {{ author.first_name }} {{ author.last_name }}</h1>
+  <a href="{{ author.get_absolute_url}}update">Изменить</a>
+  <a href="{{ author.get_absolute_url }}delete">Удалить</a>
+  <hr>
+  <br>
+  <p>{{ author.date_of_birth }}</p><br>
+
+  <h2>Books</h2>
+  <ul>
+    {% for book in book_list %}
+        {% if author == book.author %}
+            <li>
+                <strong><a href="{% url 'book-detail' book.pk %}">{{ book.title }}</a></strong>
+                <p>{{ book.summary }}</p>
+            </li>
+        {% endif %}
+    {% endfor %}
+  </ul> 
+ 
+
+{% endblock %}
